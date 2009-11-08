@@ -159,12 +159,12 @@ module KulerShaker
           sw = ::KulerShaker::KulerSwatch.new
           sw.hex_color = swatch.elements["kuler:swatchHexColor"].text
           sw.color_mode = swatch.elements["kuler:swatchColorMode"].text
-          sw.channel_1 = swatch.elements["kuler:swatchChannel1"].text
-          sw.channel_2 = swatch.elements["kuler:swatchChannel2"].text
-          sw.channel_3 = swatch.elements["kuler:swatchChannel3"].text
-          sw.channel_4 = swatch.elements["kuler:swatchChannel4"].text
-          sw.swatch_index = swatch.elements["kuler:swatchIndex"].text
-          
+          sw.channel_1 = swatch.elements["kuler:swatchChannel1"].text.to_f
+          sw.channel_2 = swatch.elements["kuler:swatchChannel2"].text.to_f
+          sw.channel_3 = swatch.elements["kuler:swatchChannel3"].text.to_f
+          sw.channel_4 = swatch.elements["kuler:swatchChannel4"].text.to_f
+          sw.swatch_index = swatch.elements["kuler:swatchIndex"].text.to_i
+					
           s.swatches << sw
         end
       
