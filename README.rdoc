@@ -1,0 +1,33 @@
+==KulerShaker
+
+A small library that lets you grab colour schemes or comments from Adobe's Kuler service. You need a developer
+key from Adobe before you can properly use this library. Allows you to retrieve information from the 'get',
+'search', and 'comment' feeds. Results from the 'get' and 'search' feeds are returned as an array of objects 
+with the following structure:
+
+==Further Reading
+
+* Adobe Kuler API docs:: http://kuler-api.adobe.com
+* Adobe Kuler main page:: http://kuler.adobe.com 
+
+==Examples
+
+	Get highest rated feeds:
+	KulerShaker::Feed.get :key => developer_key, :list_type => "rating"+
+
+	Get most popular feeds for the last 30 days:
+	KulerShaker::Feed.get :key => developer_key, :list_type => "popular", :time+span => 30+
+
+	Search for themes with the word "blue" in the name, tags, user name, etc
+	KulerShaker::Feed.search :key => developer_key, :all_fields => "blue"
+
+	Search for a specific e-mail user:
+	KulerShaker::Feed.search :key => developer_key, :email => "user@kuler.com"
+
+	Get Comments for theme(firenze):
+	KulerShaker::Feed.comments :key => developer_key, :theme_id => 24198
+
+	Get comments for a member:
+	KulerShaker::Feed.comments :key => developer_key, :email => "user@kuler.com"
+
+Copyright (c) 2009 Nick del Pozo, released under the MIT license

@@ -1,7 +1,18 @@
 module KulerShaker
+  
+  # Provides methods for interacting with the Adobe Kuler RSS feed. 
   class Feed
     public
     
+    # Retrieve the comments for a particular theme or user. The comments retreived can be
+    # customised using options. Returns an array of KulerShaker::KulerComment objects.
+    #
+    # ==Options
+    # [theme_id] search for comments attached to a specific theme
+    # [email] seach for comments by a user identified by their email
+    # [start_index] 0 based index specifying the first item to display
+    # [items_per_page] the maximum number of items to display in the range 1..100
+    # [key] *required:* your Kuler API developer key
     def self.comments *args
       args.flatten! if args
       args.compact! if args
@@ -26,20 +37,20 @@ module KulerShaker
       comments_from_xml_response res.body
     end
     
-    # Function: search
-    # Perform a search on the Kuler Service. Search can be customised using options.
+    # Perform a search on the Kuler Service. Search can be customised using options. Returns 
+    # an array of KulerShaker::KulerScheme objects.
     #
-    # Options:
-    # theme_id - search for a specific theme ID
-    # user_id - search for a specific user ID
-    # email - search for a specific email
-    # tag - search for a specific tag
-    # hex - search for a specific hex colour
-    # title - search for a specific title
-    # all_fields - search in all fields
-    # start_index - 0 based index specifying the first item to display
-    # items_per_page - the maximum number of items to display in the range 1..100
-    # key - _required_ your API key for Kuler
+    # ==Options
+    # [theme_id] search for a specific theme ID
+    # [user_id] search for a specific user ID
+    # [email] search for a specific email
+    # [tag] search for a specific tag
+    # [hex] search for a specific hex colour
+    # [title] search for a specific title
+    # [all_fields] search in all fields
+    # [start_index] 0 based index specifying the first item to display
+    # [items_per_page] the maximum number of items to display in the range 1..100
+    # [key] *required:* your Kuler API developer key
     def self.search *args
       args.flatten! if args
       args.compact! if args
@@ -69,16 +80,15 @@ module KulerShaker
       swatches_from_xml_response res.body
     end
     
-    # Function: get
     # Will retreive a set of schemes from the Kuler service. The schemes retreived can be
-    # customised by using options.
+    # customised by using options. Returns an array of KulerShaker::KulerScheme objects.
     #
-    # Options:
-    # list_type - one of 'recent', 'popular', 'rating', or 'random' (default is 'recent')
-    # start_index - 0 based index specifying the first item to display
-    # items_per_page - the maximum number of items to display in the range 1..100
-    # time_span - value in days to limit the retreival of sets.
-    # key - _required_ your API key for Kuler
+    # ==Options
+    # [list_type] one of 'recent', 'popular', 'rating', or 'random' (default is 'recent')
+    # [start_index] 0 based index specifying the first item to display
+    # [items_per_page] the maximum number of items to display in the range 1..100
+    # [time_span] value in days to limit the retreival of sets.
+    # [key] *required:* your Kuler API developer key
     def self.get *args
     
       args.flatten! if args
@@ -105,7 +115,7 @@ module KulerShaker
     private
 
     # return the comments contained in the response
-    def self.comments_from_xml_response xml_data
+    def self.comments_from_xml_response xml_data #:nodoc:
       comments = []
       
       doc = REXML::Document.new xml_data
@@ -129,7 +139,7 @@ module KulerShaker
     end
 
     # return the swatches contained in the response
-    def self.swatches_from_xml_response xml_data
+    def self.swatches_from_xml_response xml_data #:nodoc:
       schemes = []
       items = []    
       
@@ -175,27 +185,27 @@ module KulerShaker
     end
 
     # convert a hash of options into a parameter string
-    def self.feed_options options = {}
+    def self.feed_options options = {} #:nodoc:
       ActionController::Routing::Route.new.build_query_string options
     end
   
     # this is the address for the kuler service
-    def self.service_address
+    def self.service_address #:nodoc:
       "http://kuler-api.adobe.com" 
     end
   
     # this is the suffix for the Get RSS Feed
-    def self.get_feed_address
+    def self.get_feed_address #:nodoc:
       "/rss/get.cfm"
     end
-  
+
     # this is the suffix for the Search RSS Feed
-    def self.search_feed_address
+    def self.search_feed_address #:nodoc:
       "/rss/search.cfm"
     end
     
     # this is the suffix for the Comments Feed
-    def self.comments_feed_address
+    def self.comments_feed_address #:nodoc:
       "/rss/comments.cfm"
     end
 

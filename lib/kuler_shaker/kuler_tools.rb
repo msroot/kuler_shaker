@@ -1,14 +1,9 @@
 module KulerShaker
+	
+	# provides utility functions for interacting with KulerShaker::KulerSwatch objects.
 	class Tools
 		
-		# Function: brightness
-		# returns the brightness of a swatch.
-		#
-		# Parameters:
-		# swatch - calculations are performed on a swatch
-		#
-		# Returns:
-		# returns the brightness as a numeric value
+		# Calculate the brightness value of a KulerShaker::KulerSwatch. Returns the brightness as a numeric value.
 		def self.brightness swatch
 
 			b = (((swatch.hex_color[0..1].to_i(16) / 255.0) * 299.0) +
@@ -18,14 +13,7 @@ module KulerShaker
 			return b
 		end
 		
-		# Function: complementary
-		# returns a swatch that has the complementary colour for the swtach that is passed in.
-		#
-		# Parameters:
-		# swatch - get the complementary colour for this swatch
-		#
-		# Return:
-		# a KulerSwatch containing the complementary colour.
+		# Returns a KulerShaker::KulerSwatch that has the complementary colour for the swtach that is passed in.
 		def self.complementary swatch
 			
 			rgbswatch = swatch.dup
@@ -60,26 +48,9 @@ module KulerShaker
 			return rgbswatch
 		end
 		
-		def self.readable_complementary swatch
-			
-			
-			c = complementary swatch
-			
-			
-		
-		end
-		
-		
-		# Function: swatch_to_hsl
-		# will calculate the hsl values for the swatch that is passed in. used info from:
+		# Will return a HSL colour mode version of the KulerShaker::KulerSwatch that was passed in. I adapted code from
 		# http://www.mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
-		# to get this.
-		#
-		# Parameters:
-		# swatch - get the HSL values for this swatch.
-		#
-		# Returns:
-		# a swatch containing the colour as hsl
+		# to get this working.
 		def self.swatch_to_hsl swatch
 			
 			hslswatch = swatch.dup
@@ -124,17 +95,9 @@ module KulerShaker
 			return hslswatch
 		end
 		
-		
-		
-		# Function: swatch_to_rgb
-		# will calculate the rgb values for the swatch that is passed in. used info from
-		# http://130.113.54.154/~monger/hsl-rgb.html to write this.
-		#
-		# Parameters:
-		# swatch - the swatch to convert
-		#
-		# Returns:
-		# an rgb version of the input swatch
+		# Will return an RGB colour mode version of the KulerShaker::KulerSwatch that is passed in. I adapted code from
+		# http://www.mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
+		# to get this working.
 		def self.swatch_to_rgb swatch
 			
 			rgbswatch = swatch.dup
