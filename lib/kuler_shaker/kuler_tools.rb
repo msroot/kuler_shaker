@@ -141,5 +141,43 @@ module KulerShaker
 			return rgbswatch
 		end
 
+		# genreates and returns a random swatch.
+		def self.random_swatch
+			swatch = KulerSwatch.new
+			swatch.color_mode = 'rgb'
+			swatch.hex_color = ''
+			swatch.channel_1 = rand(255)
+			swatch.channel_2 = rand(255)
+			swatch.channel_3 = rand(255)
+			swatch.channel_4 = 0
+			swatch.swatch_index = 0
+			
+			[swatch.channel_1, swatch.channel_2, swatch.channel_3].each do |channel|
+				fragment = channel.to_s(16)
+				if fragment.length == 1
+					fragment = "0" + fragment
+				end
+				swatch.hex_color += fragment
+			end
+			
+			return swatch
+		end
+		
+		# generates and returns a random scheme. Not all the fields are filled in (can't make an author
+		# id or ranking, for example), but the colours in the swatch will be random.
+		def self.random_scheme
+			scheme = KulerScheme.new
+			scheme.title = "random"
+			scheme.author_name = "random"
+			
+			scheme.swatches = []
+			5.times do 
+				scheme.swatches << KulerShaker::Tools.random_swatch
+			end
+			
+			return scheme
+			
+		end
+
 	end
 end
